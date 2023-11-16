@@ -35,8 +35,8 @@ public class Student {
     @JsonIgnoreProperties({"my_student"})
     private List<Book> bookList;
 
-    @OneToMany(mappedBy = "my_student")
-    @JsonIgnoreProperties({"my_student"})
+    @OneToMany(mappedBy = "student")
+    @JsonIgnoreProperties({"student"})
     List<Transaction> transactionList;
 
     private Date validity;

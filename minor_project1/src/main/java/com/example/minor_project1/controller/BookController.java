@@ -1,5 +1,6 @@
 package com.example.minor_project1.controller;
 
+import com.example.minor_project1.dto.BookResponse;
 import com.example.minor_project1.dto.CreateBookRequest;
 import com.example.minor_project1.dto.SearchBookRequest;
 import com.example.minor_project1.model.Book;
@@ -23,8 +24,14 @@ public class BookController {
     }
 
     @DeleteMapping("/{bookId}")
-    public Book deleteBook(@PathVariable("bookId") int bookId){
-        return bookService.delete(bookId);
+    public BookResponse deleteBook(@PathVariable("bookId") int bookId){
+        try{
+            return BookResponse.from(bookService.delete(bookId));
+            //return bookService.delete(bookId);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
+        }
     }
 
     /*@GetMapping("/{authorEmail}")

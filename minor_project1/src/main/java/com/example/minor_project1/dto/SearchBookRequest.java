@@ -20,6 +20,8 @@ public class SearchBookRequest {
     @NotBlank
     private String operator;
 
+    private boolean available;
+
     private static Set<String>allowedKeys=new HashSet<>();
 
     private static Map<String,List<String >>allowedOperatorsMap=new HashMap<>();

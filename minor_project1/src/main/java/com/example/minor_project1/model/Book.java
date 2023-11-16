@@ -51,8 +51,8 @@ public class Book {
     @UpdateTimestamp
     private Date updatedOn;
 
-    @OneToMany(mappedBy = "my_book")
-    @JsonIgnoreProperties({"my_book"})
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"book"})
     List<Transaction> transactionList;
 
 }

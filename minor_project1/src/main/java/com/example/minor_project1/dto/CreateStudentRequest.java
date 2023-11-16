@@ -23,7 +23,7 @@ public class CreateStudentRequest {
         return Student.builder()
                 .name(this.name)
                 .contact(this.contact)
-                .validity(new Date(System.currentTimeMillis()+31536000000l))
+                .validity(new Date(System.currentTimeMillis() + 31536000000l))
                 .build();
     }
 

@@ -39,12 +39,12 @@ public class Transaction {
     @ManyToOne
     @JoinColumn
     @JsonIgnoreProperties({"transactionList"})
-    private Book my_book;
+    private Book book;
 
     @ManyToOne
     @JoinColumn
     @JsonIgnoreProperties("{transactionList}")
-    private Student my_student;
+    private Student student;
 
     private Double fine;
 

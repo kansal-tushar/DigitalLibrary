@@ -1,5 +1,10 @@
 package com.example.minor_project1.controller;
 
+import com.example.minor_project1.model.enums.TransactionType;
+import com.example.minor_project1.service.TransactionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -12,9 +17,9 @@ public class TransactionController {
 
     /**
      * Issuance
-     * 1.Create a txn with pending status
-     * 2.Get the book details and student details
-     * 3.Validations
+     * 1.Get the book details and student details
+     * 2.Validations
+     * 3.Create a txn with pending status
      * 4.Assign the book to that particular student//update book set student_id=?
      * 5.Update the txn accordingly with status as SUCCESS or FAILED
      */
@@ -26,5 +31,26 @@ public class TransactionController {
      * 3.Unassign the book from student//update book set student_id=null
      * 4.Update the txn accordingly with status as SUCCESS or FAILED
      */
+
+    @Autowired
+    TransactionService transactionService;
+
+//    @PostMapping("/transaction")
+//    public String initiateTxn(@RequestParam("name") String name, @RequestParam("studentId") int studentId,
+//                              @RequestParam("type") TransactionType transactionType) throws Exception {
+//        return transactionService.initiateTxn(name,studentId,transactionType);
+//    }
+
+    @PostMapping("/transaction/issue")
+    public String issueTxn(@RequestParam("name") String name, @RequestParam("studentId") int studentId)
+            throws Exception {
+        return transactionService.issueTxn(name,studentId);
+    }
+
+    @PostMapping("/transaction/return")
+    public String returnTxn(@RequestParam("id") int bookId, @RequestParam("studentId") int studentId)
+            throws Exception {
+        return transactionService.returnTxn(bookId,studentId);
+    }
 
 }
