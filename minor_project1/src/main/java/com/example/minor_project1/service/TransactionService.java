@@ -1,6 +1,8 @@
 package com.example.minor_project1.service;
 
 import com.example.minor_project1.dto.SearchBookRequest;
+import com.example.minor_project1.exceptions.BookLimitExceededException;
+import com.example.minor_project1.exceptions.BookNotFoundException;
 import com.example.minor_project1.model.Book;
 import com.example.minor_project1.model.Student;
 import com.example.minor_project1.model.Transaction;
@@ -27,7 +29,7 @@ public class TransactionService {
     @Autowired
     TransactionRepository transactionRepository;
 
-    @Value("${student.issue.max_books}")
+    @Value("${student.issue.max_books}:3")
     private int maxBooksForIssuance;
 
     @Value("${student.issue.number_of_days}")
@@ -61,10 +63,10 @@ public class TransactionService {
         Student student=studentService.get(studentId);
         //Validations
         if(student.getBookList()!=null && student.getBookList().size()>=maxBooksForIssuance){
-            throw new Exception("Book limit reached");
+            throw new BookLimitExceededException("Book limit reached");
         }
         if(bookList.isEmpty()){
-            throw new Exception("Not able to find any book in the library");
+            throw new BookNotFoundException("Not able to find any book in the library");
         }
         Book book=bookList.get(0);
         Transaction transaction=Transaction.builder()
