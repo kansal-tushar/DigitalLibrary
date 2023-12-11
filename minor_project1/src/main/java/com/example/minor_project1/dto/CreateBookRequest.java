@@ -3,8 +3,8 @@ package com.example.minor_project1.dto;
 import com.example.minor_project1.model.Author;
 import com.example.minor_project1.model.Book;
 import com.example.minor_project1.model.enums.Genre;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter

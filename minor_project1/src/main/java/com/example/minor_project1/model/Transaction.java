@@ -3,7 +3,7 @@ package com.example.minor_project1.model;
 import com.example.minor_project1.model.enums.TransactionStatus;
 import com.example.minor_project1.model.enums.TransactionType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;

@@ -1,7 +1,7 @@
 package com.example.minor_project1.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -31,6 +31,7 @@ public class Student {
     @UpdateTimestamp
     private Date updatedOn;
 
+
     @OneToMany(mappedBy = "my_student")
     @JsonIgnoreProperties({"my_student"})
     private List<Book> bookList;
@@ -40,5 +41,10 @@ public class Student {
     List<Transaction> transactionList;
 
     private Date validity;
+
+    @OneToOne
+    @JoinColumn
+    @JsonIgnoreProperties(value = {"admin"})
+    private SecuredUser securedUser;
 
 }

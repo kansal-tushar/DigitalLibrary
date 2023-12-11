@@ -1,6 +1,6 @@
 package com.example.minor_project1.dto;
 
-import jakarta.validation.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.*;

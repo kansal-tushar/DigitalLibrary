@@ -5,7 +5,7 @@ import com.example.minor_project1.dto.CreateBookRequest;
 import com.example.minor_project1.dto.SearchBookRequest;
 import com.example.minor_project1.model.Book;
 import com.example.minor_project1.service.BookService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

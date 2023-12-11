@@ -29,7 +29,7 @@ public class TransactionService {
     @Autowired
     TransactionRepository transactionRepository;
 
-    @Value("${student.issue.max_books}:3")
+    @Value("${student.issue.max_books}")
     private int maxBooksForIssuance;
 
     @Value("${student.issue.number_of_days}")

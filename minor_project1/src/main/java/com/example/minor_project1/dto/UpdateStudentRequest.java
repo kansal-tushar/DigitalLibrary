@@ -1,7 +1,7 @@
 package com.example.minor_project1.dto;
 
 import com.example.minor_project1.model.Student;
-import jakarta.validation.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.Date;

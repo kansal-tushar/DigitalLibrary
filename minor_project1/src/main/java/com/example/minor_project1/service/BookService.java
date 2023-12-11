@@ -9,7 +9,7 @@ import com.example.minor_project1.model.Transaction;
 import com.example.minor_project1.model.enums.Genre;
 import com.example.minor_project1.repository.AuthorRepository;
 import com.example.minor_project1.repository.BookRepository;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;

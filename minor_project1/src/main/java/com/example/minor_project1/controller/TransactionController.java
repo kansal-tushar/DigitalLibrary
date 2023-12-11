@@ -1,8 +1,11 @@
 package com.example.minor_project1.controller;
 
+import com.example.minor_project1.model.SecuredUser;
 import com.example.minor_project1.model.enums.TransactionType;
 import com.example.minor_project1.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,14 +45,18 @@ public class TransactionController {
 //    }
 
     @PostMapping("/transaction/issue")
-    public String issueTxn(@RequestParam("name") String name, @RequestParam("studentId") int studentId)
-            throws Exception {
+    public String issueTxn(@RequestParam("name") String name) throws Exception {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        SecuredUser securedUser = (SecuredUser) authentication.getPrincipal();
+        int studentId = securedUser.getStudent().getId();
         return transactionService.issueTxn(name,studentId);
     }
 
     @PostMapping("/transaction/return")
-    public String returnTxn(@RequestParam("id") int bookId, @RequestParam("studentId") int studentId)
-            throws Exception {
+    public String returnTxn(@RequestParam("id") int bookId) throws Exception {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        SecuredUser securedUser = (SecuredUser) authentication.getPrincipal();
+        int studentId = securedUser.getStudent().getId();
         return transactionService.returnTxn(bookId,studentId);
     }
 
