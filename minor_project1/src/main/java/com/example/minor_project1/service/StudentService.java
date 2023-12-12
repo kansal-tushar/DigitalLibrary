@@ -1,9 +1,11 @@
 package com.example.minor_project1.service;
 
 import com.example.minor_project1.dto.CreateStudentRequest;
+import com.example.minor_project1.dto.StudentResponse;
 import com.example.minor_project1.dto.UpdateStudentRequest;
 import com.example.minor_project1.model.SecuredUser;
 import com.example.minor_project1.model.Student;
+import com.example.minor_project1.repository.StudentCacheRepository;
 import com.example.minor_project1.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +27,9 @@ public class StudentService {
     @Value("${student.authorities}")
     String authorities;
 
+    @Autowired
+    StudentCacheRepository studentCacheRepository;
+
     public Student create(CreateStudentRequest createStudentRequest){
         Student student=createStudentRequest.to();
         SecuredUser securedUser=student.getSecuredUser();
@@ -40,7 +45,27 @@ public class StudentService {
     }
 
     public Student get(int studentId) {
-        return studentRepository.findById(studentId).orElse(null);
+        long start = System.currentTimeMillis();
+        Student student = studentRepository.findById(studentId).orElse(null);
+        long end = System.currentTimeMillis();
+        System.out.println("Inside get function: Time taken to retreive the data-"+(end-start));
+        return student;
+    }
+
+    public StudentResponse getUsingCache(int studentId){
+        long start = System.currentTimeMillis();
+        StudentResponse studentResponse=studentCacheRepository.get(studentId);
+        if(studentResponse==null){
+            Student student = studentRepository.findById(studentId).orElse(null);
+            studentResponse = new StudentResponse(student);
+            studentCacheRepository.set(studentResponse);
+            long end = System.currentTimeMillis();
+            System.out.println("Inside get function: Time taken to retreive the data-"+(end-start));
+        }else{
+            long end = System.currentTimeMillis();
+            System.out.println("Inside get function: Time taken to retreive the data-"+(end-start));
+        }
+        return studentResponse;
     }
 
     public Student delete(int studentId) {

@@ -1,6 +1,7 @@
 package com.example.minor_project1.controller;
 
 import com.example.minor_project1.dto.CreateStudentRequest;
+import com.example.minor_project1.dto.StudentResponse;
 import com.example.minor_project1.dto.UpdateStudentRequest;
 import com.example.minor_project1.model.SecuredUser;
 import com.example.minor_project1.model.Student;
@@ -33,11 +34,11 @@ public class StudentController {
     }
 
     @GetMapping("/details")        // this API return the student details who is calling this api
-    public Student getStudent(){
+    public StudentResponse getStudent(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         SecuredUser securedUser = (SecuredUser) authentication.getPrincipal();
         int studentId = securedUser.getStudent().getId();
-        return  studentService.get(studentId);
+        return  studentService.getUsingCache(studentId);
     }
 
     @DeleteMapping("") // only accessible to student
